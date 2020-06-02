@@ -1,19 +1,28 @@
 import Vue from "vue";
 import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import axios from "axios";
 
 Vue.config.productionTip = false;
 
-router.beforeEach((to, from, next) => {
-  if (to.path === "/users/1") {
-    next("/");
+axios.defaults.baseURL =
+  "https://firestore.googleapis.com/v1/projects/udemy-vuejs-a5935/databases/(default)/documents";
+axios.interceptors.request.use(
+  config => {
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
   }
-  next();
-});
+);
+axios.interceptors.response.use(
+  response => {
+    return response;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
 
 new Vue({
-  router,
-  store,
   render: h => h(App)
 }).$mount("#app");

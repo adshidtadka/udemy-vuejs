@@ -1,4 +1,4 @@
-# udemy-vuejs
+# udemy-vuejs2
 
 ## Project setup
 ```
