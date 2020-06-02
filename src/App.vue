@@ -1,58 +1,19 @@
 <template>
   <div id="app">
-    <h3>掲示板に投稿する</h3>
-    <label for="name">ニックネーム: </label>
-    <input type="text" id="name" v-model="name" />
-    <br />
-    <br />
-    <label for="comment">コメント: </label>
-    <textarea id="comment" cols="30" rows="10" v-model="comment"></textarea>
-    <br />
-    <br />
-    <button @click="createComment">コメントをサーバに送る</button>
-    <h2>掲示板</h2>
-    <div v-for="post in posts" :key="post.name">
-      <div>名前: {{ post.fields.name.stringValue }}</div>
-      <div>コメント: {{ post.fields.comment.stringValue }}</div>
-      <br />
-    </div>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
-import axios from "./axios-auth";
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: "app",
-  data() {
-    return {
-      name: "",
-      comment: "",
-      posts: []
-    };
-  },
-  created() {
-    axios.get("/comments").then(response => {
-      this.posts = response.data.documents;
-    });
-  },
-  methods: {
-    createComment() {
-      axios.post("/comments", {
-        fields: {
-          name: {
-            stringValue: this.name
-          },
-          comment: {
-            stringValue: this.comment
-          }
-        }
-      });
-      this.name = "";
-      this.comment = "";
-    }
+  name: 'App',
+  components: {
+    HelloWorld
   }
-};
+}
 </script>
 
 <style>
